@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Trabalho 7
+    </title>
+</head>
+
+
+<body>
+    <label for="altura">Digite sua altura:</label>
+    <input type="text" name="altura">
+    <div>
+        <p>
+            Sexo:
+            <input type="radio" id="feminino" name="sexo" value="feminino">
+            <label for="feminino">Feminino</label>
+            <input type="radio" id="masculino" name="sexo" value="masculino">
+            <label for="masculino">Masculino</label>
+        </p>
+    </div>
+    <button type="button">Calcular peso ideal</button>
+
+
+
+    <script>
+        const button = document.querySelector('button');
+        button.onclick = function () {
+            const altura = parseFloat(document.querySelector('input').value);
+            
+            const genero = document.querySelector('input[name="sexo"]:checked').value;
+
+            if (genero == 'masculino') {
+                alert('Peso ideal é: ' + (52 + (0.75 * (altura - 152.4))) + 'kg');
+            } else {
+                alert('Peso ideal é: ' + (52 + (0.67 * (altura - 152.4))) + 'kg');
+            }
+        };
+    </script>
+</body>
+
+</html>

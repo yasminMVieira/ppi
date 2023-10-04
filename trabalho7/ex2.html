@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Trabalho 7
+    </title>
+</head>
+
+
+<body>
+    <input type="text" name="nome">
+    <button type="button">Digite seu nome e clique aqui</button>
+    <p></p>
+
+    <script>
+        const button = document.querySelector('button');
+        button.onclick = function () {
+            const nome = document.querySelector('input');
+            const parSaida = document.querySelector('p');
+            if (nome.value === '') {
+                parSaida.textContent = 'Por favor, digite um nome válido';
+            } else {
+                parSaida.textContent = 'Olá, ' + nome.value + '!';
+            }
+        }
+    </script>
+</body>
+
+</html>

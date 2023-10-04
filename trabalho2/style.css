@@ -1,0 +1,102 @@
+body{
+    background-color: #ddd;
+    margin: 0 auto;
+    padding: 2% 0;
+    width: 60%;
+    color: #444;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+header{
+    background-color: #ffffffef;
+    border-radius: 10px;
+    line-height: 1.5;
+    padding: 2%;
+    text-align: center;
+}
+
+li {
+    display: inline;
+    float: left;
+    padding: 0 10px;
+    background-color: pink;
+    
+}
+
+ 
+a {
+    display: block;
+    padding: 8px;
+    color: #444;
+    text-decoration: none;
+    border-radius: 5px;
+
+}
+
+main{   
+    background-color: #fff;
+    border-radius: 10px;
+    line-height: 1.5;
+    padding: 2%;
+}
+
+h1, h2{
+    color: rgb(140, 76, 8);
+    /* text-align: center; */
+    
+
+}
+
+/* seletor id */
+#par1 {
+    text-align: center;
+    color: red;
+}
+
+/* seletor de classe */
+.destaque {
+    color: blue;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* seletor de descendente*/
+nav a {
+    text-transform: uppercase;
+}
+
+/* seletor irmão adjacente */
+h2 + p {
+    color: green;
+}
+
+/* pseudo-classes */
+/* has */
+table:has(img) {
+    background-color: pink;
+}
+
+/* is */
+:is(div) :is(h1, h2, h3, label){
+    color: purple;
+}
+
+/* first-child */
+li:first-child {
+    color: red;
+}
+
+/* first-of-type */
+p:first-of-type {
+    color: blue;
+}
+
+
+input:invalid + span::after{
+    content: '✖';
+    color: red;
+}
+input:valid + span::after{
+    content: '✓';
+    color: limegreen;
+}

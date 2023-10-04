@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Exercicio 4">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ex4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <label for="mensagem">Digite a mensagem:</label>
+    <input type="text" id="mensagem">
+    <button type="button" id="botao2">Mostrar mensagem</button>
+    
+    <div>
+        <p></p>
+        <button type="button" id="botao1">Ok</button>
+    </div>
+    
+
+    <script>
+        const button = document.querySelector('#botao2');
+        button.onclick = function () {
+            showMessage();
+        };
+
+        function showMessage() {
+            const message = document.querySelector('input').value;
+            const parSaida = document.querySelector('p');
+
+            parSaida.textContent = message;
+            parSaida.style.visibility = 'visible';
+
+            const button1 = document.querySelector('#botao1');
+            button1.style.visibility = 'visible';
+        }
+
+        const botaoEsc2 = document.querySelector('#botao1');
+        botaoEsc2.onclick = function () {
+            const parSaida = document.querySelector('p');
+            parSaida.style.visibility = 'hidden';
+
+            const button1 = document.querySelector('#botao1');
+            button1.style.visibility = 'hidden';
+        };
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+contatos.php:
+Neste arquivo temos uma implementação php para conseguirmos criar um contato, sendo este um objeto.
+Temos funções auxiliares que adicionam esse objeto ao arquivo .txt e outra que carrega os dados para a aplicação.
+Esta é a classe mãe da aplicação, requerida por novoContato.php, ou seja, sempre que um contato é adicionado ao sistema. 
+
+novoContato.html:
+Neste arquivo temos um .html basico de cadastro, onde o formulário requere o novoContato.php usando metodo post, 
+e nesse arquivo.php são executados procedimentos "backend" para o cadastro desse contato.
+
+novoContato.php:
+Neste arquivo temos a coleta dos dados por meio de um array super global ($_POST) que permite
+acessar os campos do formulario submetidos pelo metodo POST (criado no arquivo novoContato.html).
+
+listaContatos.php:
+Neste arquivo temos o carregamento para exibição dos dados que foram adicionados ao arquivo .txt.
+A exibição é feita em formato tabela, por isso temos uma estrutura html nesse arquivo, além disso, para
+preenchemos essa tabela com os dados já existentes, utilizamos um script .php para executar um loop
+e dessa forma exibir os dados, que foram obtidos por meio da invocação de funções auxiliares que estão
+no arquivo contatos.php e posteriormente "tratadas" por meio do uso de htmlspecialchars o qual realiza conversoes
+antes de inserir o conteudo na página.
+
+listaContatos-vulneravel-xss.php:
+Neste arquivo temos a mesma ideia do listaContato.php, porém aqui existe uma estrutura a qual é
+vulneravel à ataques XSS, onde um código prejudicial (ou nao) é injetado utilizando campos do formulario.
+Isso ocorre pois se cria uma pagina dinamica inserindo diretamente na tabela HTML os dados do formulario, sem
+qualquer "tratamento".
