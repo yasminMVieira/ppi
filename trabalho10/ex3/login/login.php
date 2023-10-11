@@ -26,7 +26,7 @@ function checkLogin($pdo, $email, $senha)
   }
 }
 
-require "../conexaoMysql.php";
+require "../../conexaoMysql.php";
 $pdo = mysqlConnect();
 
 $email = $_POST["email"] ?? "";

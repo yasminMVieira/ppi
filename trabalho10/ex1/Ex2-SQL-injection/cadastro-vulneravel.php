@@ -1,6 +1,6 @@
 <?php
 
-require "../conexaoMysql.php";
+require "../../conexaoMysql.php";
 $pdo = mysqlConnect();
 
 $nome = $_POST["nome"] ?? "";

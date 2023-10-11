@@ -58,7 +58,7 @@ try {
   // Efetiva as operações
   $pdo->commit();
 
-  header("location: mostra-clintes-enderecos.php");
+  header("location: mostra-clientes-enderecos.php");
   exit();
 } 
 catch (Exception $e) {

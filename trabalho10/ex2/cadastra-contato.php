@@ -11,7 +11,7 @@ try {
 
   // NÃO FAÇA ISSO! Exemplo de código vulnerável a injeção de SQL
   $sql = <<<SQL
-  INSERT INTO Contato (nome, email, mensagem)
+  INSERT INTO contato (nome, email, mensagem)
   VALUES ('$nome', '$email', '$mensagem');
   SQL;  
 

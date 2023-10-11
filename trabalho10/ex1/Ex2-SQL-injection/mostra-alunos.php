@@ -1,6 +1,6 @@
 <?php
 
-require "../conexaoMysql.php";
+require "../../conexaoMysql.php";
 $pdo = mysqlConnect();
 
 try {
@@ -52,7 +52,7 @@ catch (Exception $e) {
       }
       ?>
     </table>
-    <a href="../index.html">Menu de opções</a>
+    <a href="index.html">Cadastrar novo aluno</a>
   </div>
 
 </body>

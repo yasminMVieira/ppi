@@ -1,6 +1,6 @@
 <?php
 
-require "../conexaoMysql.php";
+require "../../conexaoMysql.php";
 $pdo = mysqlConnect();
 
 // Resgata os dados do cliente
