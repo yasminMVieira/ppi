@@ -1,4 +1,4 @@
-CREATE TABLE Contato
+CREATE TABLE contato
 (
    id int PRIMARY KEY auto_increment,
    nome varchar(50),

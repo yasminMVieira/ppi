@@ -1,13 +1,13 @@
-CREATE TABLE Cliente
+CREATE TABLE cliente2
 (
    id int PRIMARY KEY auto_increment,
    nome varchar(50),
    cpf char(14) UNIQUE,
    email varchar(50) UNIQUE,
-   hash_senha varchar(255),
+   hash_senha varchar(255)
 ) ENGINE=InnoDB;
 
-CREATE TABLE ClienteEndereco
+CREATE TABLE clienteEndereco
 (
    id int PRIMARY KEY auto_increment,
    cep char(10),
@@ -18,6 +18,3 @@ CREATE TABLE ClienteEndereco
    id_cliente int not null,
    FOREIGN KEY (id_cliente) REFERENCES cliente(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
-
-INSERT INTO aluno VALUES ("Fulano", "123");
-INSERT INTO aluno VALUES ("Ciclano", "456");

@@ -7,7 +7,7 @@ try {
 
   $sql = <<<SQL
   SELECT endereco, bairro, cidade, estado, nome, email
-  FROM Cliente INNER JOIN ClienteEnderecos ON cliente.id = id_cliente
+  FROM cliente2 INNER JOIN clienteEnderecos ON cliente.id = id_cliente
   SQL;
 
   // Neste exemplo não é necessário utilizar prepared statements

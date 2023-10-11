@@ -21,12 +21,12 @@ $estado = $_POST["estado"] ?? "";
 $hashsenha = password_hash($senha, PASSWORD_DEFAULT);
 
 $sql1 = <<<SQL
-  INSERT INTO Cliente (nome, cpf, email, hash_senha)
+  INSERT INTO cliente2 (nome, cpf, email, hash_senha)
   VALUES (?, ?, ?, ?)
   SQL;
 
 $sql2 = <<<SQL
-  INSERT INTO ClienteEndereco 
+  INSERT INTO clienteEndereco 
     (cep, endereco, bairro, cidade,
     estado, id_cliente)
   VALUES (?, ?, ?, ?, ?, ?)
