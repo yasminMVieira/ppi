@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cotação de Ações</title>
+</head>
+
+<body>
+  <h2>Cotação de Ações</h2>
+  <form id="stockForm">
+    <p>
+      <input type="text" id="valor1" placeholder="Código da Ação 1" />
+      <input type="text" id="valor2" placeholder="Código da Ação 2" />
+      <input type="text" id="valor3" placeholder="Código da Ação 3" />
+      <input type="text" id="valor4" placeholder="Código da Ação 4" />
+      <input type="text" id="valor5" placeholder="Código da Ação 5" />
+    </p>
+    <button id="quoteButton">Cotar Sequencialmente</button>
+    <button id="quoteParallelButton">Cotar em Paralelo</button>
+  </form>
+
+  <!-- <div id="quoteResults"></div> -->
+
+  <script>
+
+    const quoteButton = document.getElementById('quoteButton');
+    const quoteParallelButton = document.getElementById('quoteParallelButton');
+
+    // quoteButton.addEventListener('click'){
+
+    // }
+
+    function getPortfolio() {
+      Promise.all([
+        GetQuote(valor1),
+        GetQuote(valor2),
+        GetQuote(valor3),
+        GetQuote(valor4),
+        GetQuote(valor5)
+      ])
+        .then(values => console.log(values));
+      // .catch (error => console.log(error));
+    }
+
+    function GetQuote(codigoAcao) {
+      return fetch('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${codigoAcao}&apikey=SCTH2TYJFYR6C9EJ')
+        .then(response => response.json())
+        .then(data => data['Global Quote']['05. price'])
+    }
+
+    function RenderStock() {
+
+    }
+
+    window.onload = function () {
+      getPortfolio();
+    }
+
+
+  </script>
+</body>
+
+</html>
