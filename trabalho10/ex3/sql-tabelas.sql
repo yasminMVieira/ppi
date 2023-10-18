@@ -16,5 +16,5 @@ CREATE TABLE clienteEndereco
    cidade varchar(50),
    estado char(2),
    id_cliente int not null,
-   FOREIGN KEY (id_cliente) REFERENCES cliente(id) ON DELETE CASCADE
+   FOREIGN KEY (id_cliente) REFERENCES cliente2(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

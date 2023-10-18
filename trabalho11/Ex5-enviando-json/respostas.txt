@@ -1,0 +1,10 @@
+O método do objeto XMLHttpRequest agora é POST ao invés de GET.
+
+Content-Type: application/json
+Content-Length: 70
+{cep: "38400-100", email: "fulano@mail.com", apikey: "abcdefg123456"}
+    apikey: "abcdefg123456"
+    cep: "38400-100"
+    email: "fulano@mail.com"
+
+Estes são os valores que estou enviando na minha requisição

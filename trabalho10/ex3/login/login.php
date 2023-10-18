@@ -4,7 +4,7 @@ function checkLogin($pdo, $email, $senha)
 {
   $sql = <<<SQL
     SELECT hash_senha
-    FROM Cliente
+    FROM cliente2
     WHERE email = ?
     SQL;
 

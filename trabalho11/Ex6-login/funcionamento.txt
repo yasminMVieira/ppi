@@ -1,0 +1,22 @@
+Não, o formulario foi enviado por meio da técnica Ajax utilizando XMLHttpRequest.
+Não houve redirecionamento, somente uma atualização incremental da página.
+Quando o login é efetivado, há um redirecionamento para a pagina home.
+
+
+Login:
+   - Um parágrafo com o id "loginFailMsg" é incluído para exibir mensagens de erro, 
+   mas inicialmente está oculto.
+
+Formulario:
+
+    Uma instancia XMLHttpRequest é criada, a requisição é configurada com 
+    xhr.open, configuramos o tipo de resposta em xhr.responseType (JSON).
+    Um evento é definido para lidar com a resposta da requisição em xhr.onload.
+    E outro para lidar com algum erro em xhr.onerror.
+    A requisição é enviada com xhr.send que envia os dados do formulário como um objeto FormData.
+
+Quando o formulário é submetido, a função sendForm faz uma requisição Ajax para "checkLogin.php".
+A resposta é processada no evento xhr.onload. Se o login estiver correto (indicado pelo JSON de resposta), 
+a página é redirecionada para a tela inicial (home.html). Se não, exibe o erro no paragrafo de
+id=loginFailMsg.
+

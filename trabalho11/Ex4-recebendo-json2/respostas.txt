@@ -1,0 +1,7 @@
+----- Exercicío 4 -------------
+
+1. Código 200
+2. Content-Type: application/json. Content-Length: 66.
+3. {"rua":"Av Floriano","bairro":"Centro","cidade":"Uberl\u00e2ndia"}
+4. Server: awex
+5. Não

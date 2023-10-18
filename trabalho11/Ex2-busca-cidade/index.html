@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Teste Ajax - onerror</title>
+  <style>
+    body {
+      font: 1.2rem Helvetica;
+      line-height: 1.5rem;
+      background-image: url("images/bg2.jpg");
+      background-size: cover;
+      margin: 0;
+    }
+
+    main {
+      width: 60%;
+      background-color: #fff;
+      border: 0.5px solid #ccc;
+      margin: 0;
+      padding: 2% 4%;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <label for="cep">Informe o CEP (38400-100 ou 38700-000)</label>
+    <input type="text" id="cep">
+    <span id="cidade"><span>
+  </main>
+
+  <script>
+    function buscaCidade(cep) { // Função que busca a cidade a partir do CEP informado
+
+      if (cep.length != 9) return;
+
+      let xhr = new XMLHttpRequest(); // Cria o objeto XMLHttpRequest
+      xhr.open("GET", "busca-cidade.php?cep=" + cep); // Configura: método, url (arquivo.php), assíncrono
+
+      xhr.onload = function () { // Define o que fazer quando a resposta chegar
+        if (xhr.status == 200) // Requisição bem sucedida
+          document.getElementById("cidade").innerText = xhr.responseText; // Coloca a cidade na página
+        else { // Erro na requisição
+          document.getElementById("cidade").innerText = "";
+          console.log(xhr.status, xhr.statusText, xhr.responseText); // Mostra o erro no console
+        }
+      };
+
+      xhr.onerror = function () { // Define o que fazer em caso de erro
+        console.log("Erro de rede");
+      };
+
+      xhr.send(); // Envia a requisição
+    }
+
+    window.onload = function () { // Define o que fazer quando a página carregar
+      const inputCep = document.querySelector("#cep");
+      inputCep.onkeyup = () => buscaCidade(inputCep.value); // Chama a função buscaCidade quando o usuário digitar algo
+    }
+  </script>
+
+</body>
+
+</html>
