@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Encadeando requisições assíncronas</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.5rem;
+      background-color: #ddd;
+      color: #555;
+      margin: 0;
+    }
+
+    main {
+      width: 60%;
+      margin: 0;
+      padding: 2% 4%;
+      background-color: #eee;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    h1 {
+      font-size: 5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <h2>Temperatura Local: <span id="temp">...</span></h2>
+    <h2>Velocidade do Vento: <span id="wind">...</span></h2>
+  </main>
+  <script>
+
+    // OBS: A função não trata todos os erros
+    function buscaClimaLocal() { // função que busca a temperatura e a velocidade do vento local
+      fetch('https://ipapi.co/json/') // busca o endereço IP do usuário
+        .then(response => response.json()) /* Isso processa a resposta da primeira solicitação como JSON
+                                              e a passa para o próximo .then como dados. */
+        .then(data => fetch(`https://api.open-meteo.com/v1/forecast?latitude=
+        ${data.latitude}&longitude=${data.longitude}&current_weather=true`)) /* Com base nas informações de latitude e longitude obtidas 
+                                                                                na solicitação anterior, isso faz uma segunda solicitação 
+                                                                                para obter informações climáticas locais a partir de uma API.*/
+        .then(response => response.json()) // converte a resposta para JSON
+        .then(data => { 
+          document.getElementById("temp").textContent = data.current_weather.temperature + '°'; // exibe a temperatura
+          document.getElementById("wind").textContent = data.current_weather.windspeed + ' km/h'; // exibe a velocidade do vento
+        }) /* Esse ultimo .then atualiza o conteúdo das tags <span> com os IDs "temp" e "wind" 
+              com os valores da temperatura atual e velocidade do vento obtidos das respostas 
+              das solicitações anteriores. */
+        .catch(error => console.log(error)); // Qualquer erro que ocorra durante as solicitações é tratado e exibido no console.
+    }
+
+    window.onload = function () { // quando a página carregar
+      buscaClimaLocal(); // busca a temperatura e a velocidade do vento local
+    }
+  </script>
+
+</body>
+
+</html>

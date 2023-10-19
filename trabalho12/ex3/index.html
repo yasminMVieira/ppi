@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cotação de Ações</title>
+</head>
+
+<body>
+  <main>
+    <h2>Cotação de Ações</h2>
+    <form id="stockForm">
+      <p>
+        <input type="text" id="valor1" placeholder="Código da Ação 1">
+        <input type="text" id="valor2" placeholder="Código da Ação 2">
+        <input type="text" id="valor3" placeholder="Código da Ação 3">
+        <input type="text" id="valor4" placeholder="Código da Ação 4">
+        <input type="text" id="valor5" placeholder="Código da Ação 5">
+      </p>
+      <button type="button" id="quoteButton">Cotar Sequencialmente</button>
+      <button type="button" id="quoteParallelButton">Cotar em Paralelo</button>
+    </form>
+
+  </main>
+  <script>
+    
+    function GetQuote(codigoAcao) {
+      return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${codigoAcao}.SA&apikey=SCTH2TYJFYR6C9EJ`)
+        .then(response => response.json())
+        .then(data => {
+          return {
+            acao: codigoAcao,
+            cotacao: data["Global Quote"]["05. price"]
+          }
+        })
+    }
+
+    function RenderStock(dado) {
+      const inserirH3 = document.createElement('h3')
+      inserirH3.textContent = dado.acao + ': ' + dado.cotacao
+      document.querySelector('main').appendChild(inserirH3)
+    }
+
+    
+    async function getSequencial() {
+      try {
+        for (i = 1; i <= 5; i++) {
+          result = await GetQuote(document.getElementById(`valor${i}`).value);
+          RenderStock(result);
+        }
+      } catch (e) { console.error(e) }
+      
+    }
+    
+    function getParalelo() {
+      
+      Promise.all([
+        GetQuote(document.getElementById('valor1').value),
+        GetQuote(document.getElementById('valor2').value),
+        GetQuote(document.getElementById('valor3').value),
+        GetQuote(document.getElementById('valor4').value),
+        GetQuote(document.getElementById('valor5').value)
+      ])
+        .then(values => values.forEach(value => RenderStock(value)))
+        .catch(error => console.log(error))
+    }
+
+    function attPage() {
+      const pageMain = document.querySelector('main')
+
+      const inserirH1 = document.createElement('h1')
+      inserirH1.textContent = 'Cotações das Ações Indicadas'
+      
+      pageMain.appendChild(inserirH1)
+
+      const inserirHr = document.createElement('hr')
+      pageMain.appendChild(inserirHr)
+    }
+
+
+    window.onload = function () {
+      document.querySelector('#quoteButton').addEventListener('click', () => {
+        document.querySelector('form').style.display = 'none'
+        attPage()
+        getSequencial()
+      })
+
+      document.querySelector('#quoteParallelButton').addEventListener('click', () => {
+        document.querySelector('form').style.display = 'none'
+        attPage()
+        getParalelo()
+      })
+    }
+
+    /* Na cotacao sequencial foi possivel observar que a cotacao de cada acao foi feita uma apos a outra,
+      enquanto na cotacao em paralelo foi possivel observar que a cotacao de cada acao foi feita ao mesmo tempo.
+      Com isso, o grafico waterfall da sequencial formou degraus e o da paralela formou uma linha reta.
+
+      Além disso, visualmente foi possivel observar que as infos na tela, quando acionado o botão sequencial
+      foram mostradas em sequencia, uma a uma. Já no paralela, só foram mostradas quando todas as acoes foram
+      concluidas.
+    */
+  </script>
+</body>
+
+</html>
