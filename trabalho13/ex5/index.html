@@ -59,6 +59,20 @@
       color: red;
       text-align: center;
     }
+
+    .explicacao{
+      width: 60%;
+      border: 0.5px solid lightgray;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 5px 5px 5px gray;
+      padding: 2rem;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
   </style>
 </head>
 
@@ -120,6 +134,74 @@
 
   </script>
 
+  <div class="explicacao">
+    <p>
+      Este codigo tem o seguinte funcionamento:
+    </p>
+    <ul>
+      <li>Quando o formulario for submetido, o metodo sendForm() sera chamado.</li>
+      <li>Este metodo faz uma requisicao POST para o arquivo login.php, enviando os dados do formulario.</li>
+      <li>Se a requisicao for bem sucedida, o usuario sera redirecionado para a pagina de boas vindas.</li>
+      <li>Se a requisicao falhar, o usuario sera informado que os dados estao incorretos.</li>
+    </ul>
+    <p>
+      O arquivo login.php tem o seguinte funcionamento:
+    </p>
+    <ul>
+      <li>A funcao checkUserCredentials consulta o banco de dados para verificar se o email existe e se a senha corresponde a senha
+        criptografada armazenada no banco de dados.</li>
+      <li>Se o email e a senha estiverem corretos, a funcao retorna true, caso contrario, retorna false.</li>
+      <li>Classe RequestResponse que possui duas propriedades: success e detail.</li>
+      <li>O objetivo desta classe e criar um objeto que possa ser codificado como JSON e enviado de volta ao cliente
+        como resposta a uma solicitacao HTTP.</li>
+      <li>Este arquivo le o email e a senha do array superglobal $_POST, cria um objeto PDO usando uma funcao
+        chamada mysqlConnect e chama a funcao checkUserCredentials para verificar se o email e a senha estao corretos.
+      </li>
+      <li>Se estiverem, o codigo inicia uma nova sessao, define algumas variaveis de sessao e cria um novo objeto
+        RequestResponse com success definido como true e detail definido como a URL da pagina inicial.</li>
+      <li>Se o email e a senha estiverem incorretos, o codigo cria um novo objeto RequestResponse com success definido
+        como false e detail definido como uma string vazia.</li>
+      <li>Por fim, o codigo codifica o objeto RequestResponse como JSON e o envia de volta ao cliente.</li>
+    </ul>
+      <p>
+        O arquivo sessionVerification.php tem o seguinte funcionamento:
+      </p>
+      <ul>
+        <li>Este arquivo define uma funcao chamada exitWhenNotLoggedIn que verifica se o usuario esta logado.</li>
+        <li>O objetivo desta função é verificar se o usuário está logado, verificando se a variável de sessão loggedIn
+          está definida.</li>
+        <li>Se o usuario nao estiver logado, a funcao redireciona o usuario para a pagina de login e encerra o script
+          usando a funcao exit().</li>
+      </ul>
+      <p>
+        O arquivo home.php tem o seguinte funcionamento:
+      </p>
+      <ul>
+        <li>Este arquivo inicia uma nova sessao usando a funcao session_start() e chama a funcao exitWhenNotLoggedIn()
+          para verificar se o usuario esta logado.</li>
+        <li>Se o usuario nao estiver logado, a funcao os redirecionara para a pagina de login e encerrara o script.</li>
+      </ul>
+      <p>
+        O arquivo logout.php tem o seguinte funcionamento:
+      </p>
+      <ul>
+        <li>
+          O codigo comeca chamando a funcao session_start() para iniciar uma sessao.
+        </li>
+        <li>
+          Em seguida, o codigo chama a funcao session_unset(): Remove todas as variáveis da sessão iniciada com session_start
+          (apenas apaga as variáveis de $_SESSION), seguida pela
+          funcao session_destroy(): Finaliza a sessão removendo os dados efetivamente armazenados
+          no servidor relativos à sessão. Isso garante que todos os dados da sessao sejam limpos e o
+          usuario seja desconectado.
+        </li>
+        <li>
+          Em seguida, o codigo chama a funcao setcookie() para excluir o cookie da sessao. Esta funcao define o valor do
+          cookie da sessao como uma string vazia e define o tempo de expiracao como um segundo atras, fazendo com que o
+          cookie seja excluido.
+        </li>
+      </ul>
+  </div>
 </body>
 
 </html>

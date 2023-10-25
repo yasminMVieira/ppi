@@ -3,9 +3,9 @@
 function mysqlConnect()
 {
   $db_host = "localhost";
-  $db_username = "ppi";
-  $db_password = "ppi123";
-  $db_name = "ppi";
+  $db_username = "id21373951_ppi";
+  $db_password = "senhaForte123.";
+  $db_name = "id21373951_ppi";
 
   // dsn é apenas um acrônimo de database source name
   $dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8mb4";

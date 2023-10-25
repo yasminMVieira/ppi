@@ -65,43 +65,46 @@
 
   <script>
 
-    function renderProducts(newProducts) {
+    function renderProducts(newProducts) { // função que renderiza os produtos na tela
 
-      const prodsSection = document.getElementById("products");
-      const template = document.getElementById("template");
+      const prodsSection = document.getElementById("products"); // seleciona a seção de produtos
+      const template = document.getElementById("template"); // seleciona o template
 
-      for (let product of newProducts) {
-        let html = template.innerHTML
-          .replace("{{prod-image}}", product.imagePath)
+      for (let product of newProducts) { // para cada produto do array de produtos
+        let html = template.innerHTML 
+          .replace("{{prod-image}}", product.imagePath) // substitui as variaveis do template pelos valores do produto
           .replace("{{prod-name}}", product.name)
           .replace("{{prod-price}}", product.price);
 
-        prodsSection.insertAdjacentHTML("beforeend", html);
+        prodsSection.insertAdjacentHTML("beforeend", html); // insere o html gerado no final da seção de produtos
       };
     }
 
-    async function loadProducts() {
+    async function loadProducts() { // funcão assincrona que busca os produtos e chama a função de renderização 
 
       try {
-        let response = await fetch("more-products.php");
+        let response = await fetch("more-products.php"); /* Neste momento a execucao da funcao é suspensa enquanto a 
+                                                          requisicao é tratada de forma assincrona em outra thread. */ 
         if (!response.ok) throw new Error(response.statusText);
-        var products = await response.json();
+        var products = await response.json();/* Execucao é retormada e inicia a operacao response.json() que novamente suspende a loadProducts
+                                                  qnd a leitura e conversao do json finalizar em segundo plano, a execucao é retomada e o
+                                                  os products é retornado. */
       }
-      catch (e) {
+      catch (e) { // se a promise for rejeitada, o erro é tratado aqui
         console.error(e);
         return;
       }
 
-      renderProducts(products);
+      renderProducts(products); // chama a função de renderização
     }
 
-    window.onload = function () {
+    window.onload = function () { // carrega os produtos ao carregar a pagina
       loadProducts();
     }
 
-    window.onscroll = function () {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        loadProducts();
+    window.onscroll = function () { // carrega mais produtos ao rolar a pagina até o final
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { // se o scroll atingir o final da pagina
+        loadProducts(); // carrega mais produtos
       }
     };
 

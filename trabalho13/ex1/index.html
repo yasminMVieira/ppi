@@ -46,31 +46,36 @@
 
   <script>
 
-    async function buscaEndereco(cep) {   
+    async function buscaEndereco(cep) {   // Funcao assincrona (async) que busca o endereco e retorna uma Promise
       if (cep.length != 9) return;
 
       try {
-        let response = await fetch("busca-endereco.php?cep=" + cep);
-        if (!response.ok) throw new Error(response.statusText);
-        var endereco = await response.json();
+        let response = await fetch("busca-endereco.php?cep=" + cep); /* Neste momento a execucao da funcao é suspensa enquanto a 
+                                                                      requisicao é tratada de forma assincrona em outra thread. */ 
+        if (!response.ok) throw new Error(response.statusText); // Se a resposta nao for ok, erro
+        var endereco = await response.json(); /* Execucao é retormada e inicia a operacao response.json() que novamente suspende a buscaEndereco
+                                                  qnd a leitura e conversao do json finalizar em segundo plano, a execucao é retomada e o
+                                                  endereco é retornado. */
       }
-      catch (e) {
+      catch (e) { // se a promise for rejeitada, o erro é tratado aqui
         console.error(e);
         return;
       }
 
-      let form = document.querySelector("form");
+      let form = document.querySelector("form"); // preenche os campos do formulario
       form.rua.value = endereco.rua;
       form.bairro.value = endereco.bairro;
       form.cidade.value = endereco.cidade;
     }
 
-    window.onload = function () {
+    window.onload = function () { // quando a pagina carregar, associa a funcao buscaEndereco ao evento onkeyup do campo cep
       const inputCep = document.querySelector("#cep");
       inputCep.onkeyup = () => buscaEndereco(inputCep.value);
     }
 
   </script>
+
+  <img src="../img/img1.png" alt="">
 
 </body>
 
